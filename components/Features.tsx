@@ -1,4 +1,4 @@
-export default function Features() {
+export default function Features(): JSX.Element {
   const features = [
     {
       icon: (
@@ -12,14 +12,13 @@ export default function Features() {
           strokeLinecap="round"
           strokeLinejoin="round"
         >
-          <path d="M12 2L2 7l10 5 10-5-10-5z" />
-          <path d="M2 17l10 5 10-5" />
-          <path d="M2 12l10 5 10-5" />
+          <path d="M12 20h9" />
+          <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
         </svg>
       ),
-      title: "Preserves Your Intent",
+      title: "Instant Rewrites",
       description:
-        "Your message stays yours. We just polish how it lands.",
+        "Transform any email in under 3 seconds while preserving your core message.",
     },
     {
       icon: (
@@ -34,12 +33,14 @@ export default function Features() {
           strokeLinejoin="round"
         >
           <circle cx="12" cy="12" r="10" />
-          <polyline points="12 6 12 12 16 14" />
+          <path d="M8 14s1.5 2 4 2 4-2 4-2" />
+          <line x1="9" y1="9" x2="9.01" y2="9" />
+          <line x1="15" y1="9" x2="15.01" y2="9" />
         </svg>
       ),
-      title: "Instant Results",
+      title: "Tone Detection",
       description:
-        "Paste, click, copy. Transform any email in under 3 seconds.",
+        "AI identifies passive-aggressive or tense language before you hit send.",
     },
     {
       icon: (
@@ -54,12 +55,12 @@ export default function Features() {
           strokeLinejoin="round"
         >
           <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-          <path d="M7 11V7a5 5 0 0110 0v4" />
+          <path d="M7 11V7a5 5 0 0 1 10 0v4" />
         </svg>
       ),
-      title: "Private & Secure",
+      title: "Secure & Private",
       description:
-        "Your emails are never stored. Process and forget.",
+        "Your emails are never stored. Processing happens in real-time only.",
     },
     {
       icon: (
@@ -73,47 +74,50 @@ export default function Features() {
           strokeLinecap="round"
           strokeLinejoin="round"
         >
-          <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
           <circle cx="9" cy="7" r="4" />
-          <path d="M23 21v-2a4 4 0 00-3-3.87" />
-          <path d="M16 3.13a4 4 0 010 7.75" />
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+          <path d="M16 3.13a4 4 0 0 1 0 7.75" />
         </svg>
       ),
-      title: "Built for Teams",
+      title: "Team Insights",
       description:
-        "Perfect for HR managers handling sensitive communications.",
+        "Analytics dashboard to track communication patterns across your team.",
     },
   ];
 
   return (
-    <section id="features" className="py-20 bg-white">
+    <section id="features" className="py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-2xl">
-          <h2 className="font-display font-bold text-3xl sm:text-4xl text-foreground tracking-tight">
-            Communication tools that work
-          </h2>
-          <p className="mt-4 text-lg text-muted">
-            Designed for workplace realities, not ideal scenarios.
-          </p>
-        </div>
+        <div className="grid lg:grid-cols-3 gap-12 items-start">
+          <div className="lg:sticky lg:top-32">
+            <h2 className="font-display font-bold text-3xl sm:text-4xl text-navy-900">
+              Built for HR teams who value clarity
+            </h2>
+            <p className="mt-4 text-muted font-body leading-relaxed">
+              Every feature designed to reduce workplace tension and improve
+              team communication.
+            </p>
+          </div>
 
-        <div className="mt-16 grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {features.map((feature, index) => (
-            <div
-              key={index}
-              className="group p-6 bg-background rounded-xl border border-gray-100 hover:border-accent/20 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300"
-            >
-              <div className="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-white transition-colors duration-300">
-                {feature.icon}
+          <div className="lg:col-span-2 grid sm:grid-cols-2 gap-6">
+            {features.map((feature, index) => (
+              <div
+                key={index}
+                className="p-6 bg-white rounded-xl border border-navy-100 hover:border-accent/30 hover:shadow-lg hover:shadow-accent/5 transition-all"
+              >
+                <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center text-accent">
+                  {feature.icon}
+                </div>
+                <h3 className="mt-4 font-display font-semibold text-lg text-navy-900">
+                  {feature.title}
+                </h3>
+                <p className="mt-2 text-muted font-body text-sm leading-relaxed">
+                  {feature.description}
+                </p>
               </div>
-              <h3 className="mt-5 font-display font-semibold text-lg text-foreground">
-                {feature.title}
-              </h3>
-              <p className="mt-2 text-muted text-sm leading-relaxed">
-                {feature.description}
-              </p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>

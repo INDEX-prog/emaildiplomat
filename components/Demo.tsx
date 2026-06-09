@@ -2,296 +2,125 @@
 
 import { useState } from "react";
 
-type TransformState = "idle" | "loading" | "success" | "error";
+const exampleInput = `Hi team,
 
-export default function Demo() {
-  const [inputEmail, setInputEmail] = useState<string>("");
-  const [outputEmail, setOutputEmail] = useState<string>("");
-  const [transformState, setTransformState] = useState<TransformState>("idle");
-  const [copied, setCopied] = useState<boolean>(false);
+As I've mentioned MULTIPLE times before, the reports were due yesterday. I don't understand why this keeps happening. It's really not that hard to meet a simple deadline.
 
-  const exampleInput = `Hi Team,
+If you can't handle basic responsibilities, maybe we need to have a different conversation.
 
-As I mentioned in my PREVIOUS email (which apparently no one read), the deadline was yesterday. I shouldn't have to keep repeating myself. 
+Thanks (not really),
+Sarah`;
 
-It would be nice if people actually did their jobs instead of making excuses.
+const exampleOutput = `Hi team,
 
-Thanks for nothing.`;
+I wanted to follow up on the reports that were due yesterday. I understand everyone has competing priorities, and I'd like to discuss how we can better support timely submissions.
 
-  const exampleOutput = `Hi Team,
+Could we schedule a brief check-in to identify any blockers and find solutions together?
 
-I wanted to follow up on the project deadline that we discussed. I noticed we're a bit behind schedule, and I'd like to understand if there are any blockers I can help with.
+Best regards,
+Sarah`;
 
-Could we schedule a quick sync to align on next steps and ensure we're all set up for success?
+export default function Demo(): JSX.Element {
+  const [inputText, setInputText] = useState<string>(exampleInput);
+  const [outputText, setOutputText] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [hasTransformed, setHasTransformed] = useState<boolean>(false);
 
-Looking forward to working together on this.`;
+  const handleTransform = (): void => {
+    setIsLoading(true);
+    setHasTransformed(false);
 
-  const handleTransform = async (): Promise<void> => {
-    if (!inputEmail.trim()) return;
-
-    setTransformState("loading");
-
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-
-    // For demo purposes, show a transformed version
-    // In production, this would call an actual AI API
-    try {
-      const transformed = simulateTransform(inputEmail);
-      setOutputEmail(transformed);
-      setTransformState("success");
-    } catch {
-      setTransformState("error");
-    }
+    setTimeout(() => {
+      setOutputText(exampleOutput);
+      setIsLoading(false);
+      setHasTransformed(true);
+    }, 1500);
   };
 
-  const simulateTransform = (input: string): string => {
-    // Simple demonstration - in production this would be an AI call
-    if (input.toLowerCase().includes("nothing") || input.toLowerCase().includes("apparently")) {
-      return exampleOutput;
-    }
-    return `I wanted to reach out regarding the matter you mentioned. I understand this is important and would like to work together to find a solution that works for everyone.
-
-Could we discuss this further to ensure we're aligned?
-
-Best regards`;
-  };
-
-  const handleCopy = async (): Promise<void> => {
-    if (!outputEmail) return;
-    await navigator.clipboard.writeText(outputEmail);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
-  const handleLoadExample = (): void => {
-    setInputEmail(exampleInput);
-    setOutputEmail("");
-    setTransformState("idle");
-  };
-
-  const handleClear = (): void => {
-    setInputEmail("");
-    setOutputEmail("");
-    setTransformState("idle");
+  const handleReset = (): void => {
+    setInputText(exampleInput);
+    setOutputText("");
+    setHasTransformed(false);
   };
 
   return (
-    <section id="demo" className="py-20 bg-background">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-12">
-          <h2 className="font-display font-bold text-3xl sm:text-4xl text-foreground tracking-tight">
-            Try it yourself
+    <section id="demo" className="py-20 bg-navy-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-12">
+          <h2 className="font-display font-bold text-3xl sm:text-4xl text-navy-900">
+            See the transformation
           </h2>
-          <p className="mt-4 text-lg text-muted">
-            Paste an email below and see the transformation in action.
+          <p className="mt-4 text-muted font-body max-w-2xl mx-auto">
+            Paste your email and watch it become diplomatic in seconds.
           </p>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-xl shadow-navy-900/5 border border-gray-100 overflow-hidden">
-          <div className="grid md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-gray-100">
-            {/* Input */}
-            <div className="p-6">
-              <div className="flex items-center justify-between mb-4">
-                <label
-                  htmlFor="email-input"
-                  className="font-display font-semibold text-foreground"
-                >
-                  Your email
-                </label>
-                <button
-                  type="button"
-                  onClick={handleLoadExample}
-                  className="text-sm text-accent hover:text-teal-600 font-medium transition-colors"
-                >
-                  Load example
-                </button>
-              </div>
-              <textarea
-                id="email-input"
-                value={inputEmail}
-                onChange={(e) => setInputEmail(e.target.value)}
-                placeholder="Paste your email here..."
-                className="email-input"
-                rows={8}
-              />
-              <div className="mt-4 flex gap-3">
-                <button
-                  type="button"
-                  onClick={handleTransform}
-                  disabled={!inputEmail.trim() || transformState === "loading"}
-                  className="btn-primary flex-1 disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {transformState === "loading" ? (
-                    <span className="flex items-center gap-2">
-                      <svg
-                        className="animate-spin h-5 w-5"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                      >
-                        <circle
-                          className="opacity-25"
-                          cx="12"
-                          cy="12"
-                          r="10"
-                          stroke="currentColor"
-                          strokeWidth="4"
-                        />
-                        <path
-                          className="opacity-75"
-                          fill="currentColor"
-                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                        />
-                      </svg>
-                      Transforming...
-                    </span>
-                  ) : (
-                    "Transform Email"
-                  )}
-                </button>
-                <button
-                  type="button"
-                  onClick={handleClear}
-                  className="px-4 py-3 text-muted hover:text-foreground border border-gray-200 rounded-lg transition-colors"
-                  aria-label="Clear input"
-                >
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <line x1="18" y1="6" x2="6" y2="18" />
-                    <line x1="6" y1="6" x2="18" y2="18" />
-                  </svg>
-                </button>
-              </div>
+        <div className="grid lg:grid-cols-2 gap-6">
+          <div className="bg-white rounded-xl border border-navy-200 overflow-hidden">
+            <div className="px-4 py-3 border-b border-navy-100 flex items-center justify-between">
+              <span className="text-sm font-display font-semibold text-navy-900">
+                Original Email
+              </span>
+              <span className="text-xs px-2 py-1 bg-red-50 text-red-600 rounded-full font-body">
+                Tense
+              </span>
             </div>
+            <textarea
+              value={inputText}
+              onChange={(e) => setInputText(e.target.value)}
+              placeholder="Paste your email here..."
+              className="w-full h-72 p-4 text-sm font-body text-navy-900 placeholder:text-muted resize-none focus:outline-none"
+              aria-label="Original email input"
+            />
+          </div>
 
-            {/* Output */}
-            <div className="p-6 bg-gray-50/50">
-              <div className="flex items-center justify-between mb-4">
-                <span className="font-display font-semibold text-foreground">
-                  Diplomatic version
+          <div className="bg-white rounded-xl border border-navy-200 overflow-hidden">
+            <div className="px-4 py-3 border-b border-navy-100 flex items-center justify-between">
+              <span className="text-sm font-display font-semibold text-navy-900">
+                Diplomatic Version
+              </span>
+              {hasTransformed && (
+                <span className="text-xs px-2 py-1 bg-accent/10 text-accent rounded-full font-body">
+                  Professional
                 </span>
-                {outputEmail && (
-                  <button
-                    type="button"
-                    onClick={handleCopy}
-                    className="text-sm text-accent hover:text-teal-600 font-medium transition-colors flex items-center gap-1"
-                  >
-                    {copied ? (
-                      <>
-                        <svg
-                          width="16"
-                          height="16"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <polyline points="20 6 9 17 4 12" />
-                        </svg>
-                        Copied!
-                      </>
-                    ) : (
-                      <>
-                        <svg
-                          width="16"
-                          height="16"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <rect
-                            x="9"
-                            y="9"
-                            width="13"
-                            height="13"
-                            rx="2"
-                            ry="2"
-                          />
-                          <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" />
-                        </svg>
-                        Copy
-                      </>
-                    )}
-                  </button>
-                )}
-              </div>
-
-              <div className="min-h-[180px] p-4 bg-white border-2 border-gray-100 rounded-lg">
-                {transformState === "loading" ? (
-                  <div className="space-y-3">
-                    <div className="h-4 skeleton rounded w-full" />
-                    <div className="h-4 skeleton rounded w-5/6" />
-                    <div className="h-4 skeleton rounded w-4/6" />
-                    <div className="h-4 skeleton rounded w-full mt-4" />
-                    <div className="h-4 skeleton rounded w-3/4" />
+              )}
+            </div>
+            <div className="w-full h-72 p-4 text-sm font-body text-navy-900 overflow-auto">
+              {isLoading ? (
+                <div className="flex items-center justify-center h-full">
+                  <div className="flex flex-col items-center gap-3">
+                    <div className="w-8 h-8 border-2 border-accent border-t-transparent rounded-full animate-spin" />
+                    <span className="text-muted text-sm">Transforming...</span>
                   </div>
-                ) : transformState === "error" ? (
-                  <div className="flex items-center gap-3 text-red-600">
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <circle cx="12" cy="12" r="10" />
-                      <line x1="12" y1="8" x2="12" y2="12" />
-                      <line x1="12" y1="16" x2="12.01" y2="16" />
-                    </svg>
-                    <span>Something went wrong. Please try again.</span>
-                  </div>
-                ) : outputEmail ? (
-                  <p className="text-foreground whitespace-pre-wrap leading-relaxed">
-                    {outputEmail}
-                  </p>
-                ) : (
-                  <p className="text-muted italic">
-                    Your transformed email will appear here...
-                  </p>
-                )}
-              </div>
-
-              {transformState === "success" && (
-                <div className="mt-4 flex items-center gap-2 text-sm text-accent">
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
-                    <polyline points="22 4 12 14.01 9 11.01" />
-                  </svg>
-                  <span>Transformation complete</span>
+                </div>
+              ) : outputText ? (
+                <pre className="whitespace-pre-wrap font-body">{outputText}</pre>
+              ) : (
+                <div className="flex items-center justify-center h-full text-muted">
+                  Your diplomatic email will appear here
                 </div>
               )}
             </div>
           </div>
         </div>
 
-        <p className="mt-6 text-center text-sm text-muted">
-          Your emails are processed securely and never stored.
-        </p>
+        <div className="mt-6 flex justify-center gap-4">
+          <button
+            type="button"
+            onClick={handleTransform}
+            disabled={isLoading || !inputText.trim()}
+            className="px-6 py-3 bg-accent text-white rounded-lg font-display font-semibold hover:bg-accent/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {isLoading ? "Transforming..." : "Transform Email"}
+          </button>
+          <button
+            type="button"
+            onClick={handleReset}
+            className="px-6 py-3 border-2 border-navy-200 text-navy-900 rounded-lg font-display font-semibold hover:border-navy-300 transition-colors"
+          >
+            Reset
+          </button>
+        </div>
       </div>
     </section>
   );

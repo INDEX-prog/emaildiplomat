@@ -1,45 +1,47 @@
 import Link from "next/link";
 
-export default function Pricing() {
+export default function Pricing(): JSX.Element {
   const plans = [
     {
       name: "Starter",
       price: "Free",
-      period: "",
-      description: "Try EmailDiplomat with limited transforms.",
+      period: "14-day trial",
+      description: "Try EmailDiplomat risk-free",
       features: [
-        "5 email transforms per month",
-        "Basic tone adjustment",
-        "Copy & paste interface",
+        "50 email transformations",
+        "Basic tone detection",
+        "Web app access",
+        "Email support",
       ],
-      cta: "Get Started",
+      cta: "Start Free Trial",
       popular: false,
     },
     {
       name: "Professional",
       price: "$10",
-      period: "/month",
-      description: "For individuals who email a lot.",
+      period: "per month",
+      description: "For individual users",
       features: [
-        "Unlimited email transforms",
-        "Advanced diplomatic rewriting",
-        "Priority processing",
-        "Email support",
+        "Unlimited transformations",
+        "Advanced tone analysis",
+        "Browser extension",
+        "Priority support",
+        "Export history",
       ],
-      cta: "Start Free Trial",
+      cta: "Get Started",
       popular: true,
     },
     {
       name: "Team",
       price: "$49",
-      period: "/month",
-      description: "For HR teams and departments.",
+      period: "per month",
+      description: "Up to 10 team members",
       features: [
         "Everything in Professional",
-        "Up to 10 team members",
-        "Team usage analytics",
-        "Dedicated support",
-        "Custom tone presets",
+        "Team dashboard",
+        "Communication analytics",
+        "Admin controls",
+        "Dedicated onboarding",
       ],
       cta: "Contact Sales",
       popular: false,
@@ -47,14 +49,14 @@ export default function Pricing() {
   ];
 
   return (
-    <section id="pricing" className="py-20 bg-background">
+    <section id="pricing" className="py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <h2 className="font-display font-bold text-3xl sm:text-4xl text-foreground tracking-tight">
+        <div className="text-center mb-16">
+          <h2 className="font-display font-bold text-3xl sm:text-4xl text-navy-900">
             Simple, transparent pricing
           </h2>
-          <p className="mt-4 text-lg text-muted">
-            Start free. Upgrade when you need more.
+          <p className="mt-4 text-muted font-body max-w-2xl mx-auto">
+            Start free, upgrade when you need more. No hidden fees.
           </p>
         </div>
 
@@ -62,37 +64,48 @@ export default function Pricing() {
           {plans.map((plan, index) => (
             <div
               key={index}
-              className={`relative p-8 rounded-2xl border-2 ${
+              className={`rounded-2xl p-8 ${
                 plan.popular
-                  ? "border-accent bg-white shadow-xl shadow-accent/10"
-                  : "border-gray-100 bg-white"
+                  ? "bg-navy-900 text-white ring-2 ring-accent"
+                  : "bg-white border border-navy-200"
               }`}
             >
               {plan.popular && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                  <span className="bg-accent text-white text-xs font-semibold px-4 py-1.5 rounded-full">
-                    Most Popular
-                  </span>
-                </div>
+                <span className="inline-block px-3 py-1 bg-accent text-white text-xs font-display font-semibold rounded-full mb-4">
+                  Most Popular
+                </span>
               )}
-
-              <div className="mb-6">
-                <h3 className="font-display font-bold text-xl text-foreground">
-                  {plan.name}
-                </h3>
-                <p className="mt-2 text-sm text-muted">{plan.description}</p>
-              </div>
-
-              <div className="mb-6">
-                <span className="font-display font-extrabold text-4xl text-foreground">
+              <h3
+                className={`font-display font-bold text-xl ${
+                  plan.popular ? "text-white" : "text-navy-900"
+                }`}
+              >
+                {plan.name}
+              </h3>
+              <p
+                className={`mt-1 text-sm ${
+                  plan.popular ? "text-navy-300" : "text-muted"
+                }`}
+              >
+                {plan.description}
+              </p>
+              <div className="mt-6">
+                <span
+                  className={`font-display font-bold text-4xl ${
+                    plan.popular ? "text-white" : "text-navy-900"
+                  }`}
+                >
                   {plan.price}
                 </span>
-                {plan.period && (
-                  <span className="text-muted">{plan.period}</span>
-                )}
+                <span
+                  className={`ml-2 text-sm ${
+                    plan.popular ? "text-navy-300" : "text-muted"
+                  }`}
+                >
+                  {plan.period}
+                </span>
               </div>
-
-              <ul className="space-y-3 mb-8">
+              <ul className="mt-8 space-y-3">
                 {plan.features.map((feature, featureIndex) => (
                   <li key={featureIndex} className="flex items-start gap-3">
                     <svg
@@ -102,22 +115,27 @@ export default function Pricing() {
                       fill="none"
                       stroke="currentColor"
                       strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="text-accent flex-shrink-0 mt-0.5"
+                      className={`flex-shrink-0 mt-0.5 ${
+                        plan.popular ? "text-accent" : "text-accent"
+                      }`}
                     >
                       <polyline points="20 6 9 17 4 12" />
                     </svg>
-                    <span className="text-muted text-sm">{feature}</span>
+                    <span
+                      className={`text-sm font-body ${
+                        plan.popular ? "text-navy-100" : "text-navy-700"
+                      }`}
+                    >
+                      {feature}
+                    </span>
                   </li>
                 ))}
               </ul>
-
               <Link
                 href="#demo"
-                className={`block text-center py-3 px-6 rounded-lg font-semibold transition-all duration-200 ${
+                className={`mt-8 block w-full py-3 px-4 rounded-lg font-display font-semibold text-center transition-colors ${
                   plan.popular
-                    ? "bg-accent text-white hover:bg-teal-600"
+                    ? "bg-accent text-white hover:bg-accent/90"
                     : "bg-navy-900 text-white hover:bg-navy-800"
                 }`}
               >
@@ -126,10 +144,6 @@ export default function Pricing() {
             </div>
           ))}
         </div>
-
-        <p className="mt-12 text-center text-sm text-muted">
-          All paid plans include a 14-day free trial. No credit card required to start.
-        </p>
       </div>
     </section>
   );

@@ -1,42 +1,42 @@
 import Image from "next/image";
 
-export default function Testimonials() {
+export default function Testimonials(): JSX.Element {
   const testimonials = [
     {
       quote:
-        "Our team's email complaints dropped significantly after we started using EmailDiplomat. Game changer for HR.",
-      author: "Sarah Chen",
+        "Our HR complaints about email tone dropped significantly after introducing EmailDiplomat to team leads.",
+      author: "Marie Chen",
       role: "HR Director",
-      company: "TechFlow Inc.",
-      image: "https://picsum.photos/seed/person-sarah/80/80",
+      company: "TechFlow Inc",
+      image: "hr-marie",
     },
     {
       quote:
-        "I use it daily before sending any difficult email. Saves me from responses I'd regret.",
-      author: "Marcus Johnson",
+        "I used to spend hours rephrasing difficult emails. Now it takes seconds and the results are better.",
+      author: "James Parker",
       role: "Team Lead",
-      company: "Meridian Systems",
-      image: "https://picsum.photos/seed/person-marcus/80/80",
+      company: "Nexus Solutions",
+      image: "lead-james",
     },
     {
       quote:
-        "Simple, fast, effective. Exactly what we needed for improving team communication.",
-      author: "Elena Rodriguez",
-      role: "Operations Manager",
-      company: "Bright Solutions",
-      image: "https://picsum.photos/seed/person-elena/80/80",
+        "Finally a tool that understands workplace dynamics. Essential for any people-focused organization.",
+      author: "Sarah Williams",
+      role: "People Operations",
+      company: "GrowthLab",
+      image: "ops-sarah",
     },
   ];
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 bg-navy-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <h2 className="font-display font-bold text-3xl sm:text-4xl text-foreground tracking-tight">
-            Trusted by HR professionals
+        <div className="text-center mb-16">
+          <h2 className="font-display font-bold text-3xl sm:text-4xl text-navy-900">
+            Loved by HR teams everywhere
           </h2>
-          <p className="mt-4 text-lg text-muted">
-            See what teams are saying about EmailDiplomat.
+          <p className="mt-4 text-muted font-body max-w-2xl mx-auto">
+            See how teams are transforming their workplace communication.
           </p>
         </div>
 
@@ -44,14 +44,14 @@ export default function Testimonials() {
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
-              className="bg-background p-8 rounded-2xl border border-gray-100"
+              className="bg-white rounded-xl p-6 border border-navy-100"
             >
-              <div className="flex gap-1 mb-6">
-                {[...Array(5)].map((_, i) => (
+              <div className="flex gap-1 mb-4">
+                {[1, 2, 3, 4, 5].map((star) => (
                   <svg
-                    key={i}
-                    width="20"
-                    height="20"
+                    key={star}
+                    width="16"
+                    height="16"
                     viewBox="0 0 24 24"
                     fill="currentColor"
                     className="text-accent"
@@ -60,22 +60,24 @@ export default function Testimonials() {
                   </svg>
                 ))}
               </div>
-              <blockquote className="text-foreground leading-relaxed mb-6">
+              <blockquote className="text-navy-900 font-body leading-relaxed">
                 &ldquo;{testimonial.quote}&rdquo;
               </blockquote>
-              <div className="flex items-center gap-4">
-                <Image
-                  src={testimonial.image}
-                  alt={testimonial.author}
-                  width={48}
-                  height={48}
-                  className="rounded-full object-cover"
-                />
+              <div className="mt-6 flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full overflow-hidden">
+                  <Image
+                    src={`https://picsum.photos/seed/${testimonial.image}/80/80`}
+                    alt={testimonial.author}
+                    width={40}
+                    height={40}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
                 <div>
-                  <p className="font-display font-semibold text-foreground">
+                  <p className="font-display font-semibold text-sm text-navy-900">
                     {testimonial.author}
                   </p>
-                  <p className="text-sm text-muted">
+                  <p className="text-xs text-muted">
                     {testimonial.role}, {testimonial.company}
                   </p>
                 </div>

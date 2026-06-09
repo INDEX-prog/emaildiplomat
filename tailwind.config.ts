@@ -9,20 +9,21 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Brand palette override: deep navy / white / subtle teal
         background: "#FAFBFC",
-        foreground: "#0D1B2A",
-        accent: "#1B8A8F",
-        muted: "#5C6B7A",
+        foreground: "#0A1628",
+        accent: "#0D9488",
+        muted: "#64748B",
         navy: {
-          900: "#0D1B2A",
-          800: "#1B2838",
-          700: "#2A3A4D",
-        },
-        teal: {
-          500: "#1B8A8F",
-          600: "#167478",
-          400: "#2BA3A8",
+          50: "#F0F4F8",
+          100: "#D9E2EC",
+          200: "#BCCCDC",
+          300: "#9FB3C8",
+          400: "#829AB1",
+          500: "#627D98",
+          600: "#486581",
+          700: "#334E68",
+          800: "#243B53",
+          900: "#0A1628",
         },
       },
       fontFamily: {

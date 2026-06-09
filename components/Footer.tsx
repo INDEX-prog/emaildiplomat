@@ -1,7 +1,7 @@
 import Link from "next/link";
 
-export default function Footer() {
-  const footerLinks = {
+export default function Footer(): JSX.Element {
+  const links = {
     product: [
       { label: "Features", href: "#features" },
       { label: "Pricing", href: "#pricing" },
@@ -10,7 +10,7 @@ export default function Footer() {
     company: [
       { label: "About", href: "#" },
       { label: "Blog", href: "#" },
-      { label: "Contact", href: "#" },
+      { label: "Careers", href: "#" },
     ],
     legal: [
       { label: "Privacy", href: "#" },
@@ -19,16 +19,15 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-background border-t border-gray-100">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid md:grid-cols-4 gap-8">
-          {/* Brand */}
-          <div className="md:col-span-1">
+    <footer className="bg-navy-900 py-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid md:grid-cols-4 gap-12">
+          <div>
             <Link href="/" className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-accent rounded-lg flex items-center justify-center">
+              <div className="w-8 h-8 rounded-lg bg-accent flex items-center justify-center">
                 <svg
-                  width="20"
-                  height="20"
+                  width="18"
+                  height="18"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="white"
@@ -40,26 +39,25 @@ export default function Footer() {
                   <polyline points="22,6 12,13 2,6" />
                 </svg>
               </div>
-              <span className="font-display font-bold text-lg text-foreground">
+              <span className="font-display font-bold text-xl text-white">
                 EmailDiplomat
               </span>
             </Link>
-            <p className="mt-4 text-sm text-muted max-w-xs">
+            <p className="mt-4 text-navy-400 font-body text-sm leading-relaxed max-w-xs">
               Transforming conflict into collaboration one email at a time.
             </p>
           </div>
 
-          {/* Product */}
           <div>
-            <h3 className="font-display font-semibold text-foreground mb-4">
+            <h4 className="font-display font-semibold text-white mb-4">
               Product
-            </h3>
+            </h4>
             <ul className="space-y-3">
-              {footerLinks.product.map((link, index) => (
+              {links.product.map((link, index) => (
                 <li key={index}>
                   <Link
                     href={link.href}
-                    className="text-sm text-muted hover:text-foreground transition-colors"
+                    className="text-navy-400 hover:text-white transition-colors font-body text-sm"
                   >
                     {link.label}
                   </Link>
@@ -68,17 +66,16 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Company */}
           <div>
-            <h3 className="font-display font-semibold text-foreground mb-4">
+            <h4 className="font-display font-semibold text-white mb-4">
               Company
-            </h3>
+            </h4>
             <ul className="space-y-3">
-              {footerLinks.company.map((link, index) => (
+              {links.company.map((link, index) => (
                 <li key={index}>
                   <Link
                     href={link.href}
-                    className="text-sm text-muted hover:text-foreground transition-colors"
+                    className="text-navy-400 hover:text-white transition-colors font-body text-sm"
                   >
                     {link.label}
                   </Link>
@@ -87,17 +84,16 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Legal */}
           <div>
-            <h3 className="font-display font-semibold text-foreground mb-4">
+            <h4 className="font-display font-semibold text-white mb-4">
               Legal
-            </h3>
+            </h4>
             <ul className="space-y-3">
-              {footerLinks.legal.map((link, index) => (
+              {links.legal.map((link, index) => (
                 <li key={index}>
                   <Link
                     href={link.href}
-                    className="text-sm text-muted hover:text-foreground transition-colors"
+                    className="text-navy-400 hover:text-white transition-colors font-body text-sm"
                   >
                     {link.label}
                   </Link>
@@ -107,17 +103,15 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 pt-8 border-t border-gray-100 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-muted">
-            © {new Date().getFullYear()} EmailDiplomat. All rights reserved.
+        <div className="mt-12 pt-8 border-t border-navy-800 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-navy-500 font-body text-sm">
+            © 2024 EmailDiplomat. All rights reserved.
           </p>
           <div className="flex items-center gap-4">
             <a
-              href="https://twitter.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted hover:text-foreground transition-colors"
+              href="#"
               aria-label="Twitter"
+              className="text-navy-500 hover:text-accent transition-colors"
             >
               <svg
                 width="20"
@@ -129,11 +123,9 @@ export default function Footer() {
               </svg>
             </a>
             <a
-              href="https://linkedin.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted hover:text-foreground transition-colors"
+              href="#"
               aria-label="LinkedIn"
+              className="text-navy-500 hover:text-accent transition-colors"
             >
               <svg
                 width="20"
