@@ -1,50 +1,37 @@
-import type { Config } from 'tailwindcss'
+import type { Config } from "tailwindcss";
 
 const config: Config = {
   content: [
-    './pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
       colors: {
-        // Brand palette override: deep navy, white, subtle teal
-        background: '#FAFAF8',
-        foreground: '#0A1628',
-        accent: '#0D9488',
-        muted: '#64748B',
+        // Brand palette override: deep navy / white / subtle teal
+        background: "#FAFBFC",
+        foreground: "#0D1B2A",
+        accent: "#1B8A8F",
+        muted: "#5C6B7A",
         navy: {
-          50: '#F0F4F8',
-          100: '#D9E2EC',
-          200: '#BCCCDC',
-          300: '#9FB3C8',
-          400: '#829AB1',
-          500: '#627D98',
-          600: '#486581',
-          700: '#334E68',
-          800: '#243B53',
-          900: '#0A1628',
+          900: "#0D1B2A",
+          800: "#1B2838",
+          700: "#2A3A4D",
         },
         teal: {
-          50: '#F0FDFA',
-          100: '#CCFBF1',
-          200: '#99F6E4',
-          300: '#5EEAD4',
-          400: '#2DD4BF',
-          500: '#14B8A6',
-          600: '#0D9488',
-          700: '#0F766E',
-          800: '#115E59',
-          900: '#134E4A',
+          500: "#1B8A8F",
+          600: "#167478",
+          400: "#2BA3A8",
         },
       },
       fontFamily: {
-        display: ['var(--font-plus-jakarta-sans)', 'sans-serif'],
-        body: ['var(--font-manrope)', 'sans-serif'],
+        display: ["var(--font-plus-jakarta)", "sans-serif"],
+        body: ["var(--font-manrope)", "sans-serif"],
       },
     },
   },
   plugins: [],
-}
-export default config
+};
+
+export default config;

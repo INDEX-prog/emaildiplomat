@@ -1,6 +1,6 @@
 {
   "name": "emaildiplomat",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -12,11 +12,7 @@
     "next": "14.2.29",
     "react": "^18",
     "react-dom": "^18",
-    "@libsql/client": "^0.6.0",
-    "clsx": "^2.1.0",
-    "zod": "^3.22.4",
-    "stripe": "^14.14.0",
-    "@stripe/stripe-js": "^3.0.6"
+    "clsx": "^2.1.0"
   },
   "devDependencies": {
     "typescript": "^5",

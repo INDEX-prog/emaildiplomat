@@ -1,122 +1,99 @@
-"use client";
-
-import Link from 'next/link';
-
-interface PricingTier {
-  name: string;
-  price: string;
-  period: string;
-  description: string;
-  features: string[];
-  cta: string;
-  popular: boolean;
-  href: string;
-}
+import Link from "next/link";
 
 export default function Pricing() {
-  const tiers: PricingTier[] = [
+  const plans = [
     {
       name: "Starter",
-      price: "$0",
-      period: "14-day trial",
-      description: "Try EmailDiplomat risk-free",
+      price: "Free",
+      period: "",
+      description: "Try EmailDiplomat with limited transforms.",
       features: [
-        "50 email transformations",
-        "Basic tone analysis",
-        "Copy-paste interface",
-        "Email support",
+        "5 email transforms per month",
+        "Basic tone adjustment",
+        "Copy & paste interface",
       ],
-      cta: "Start Free Trial",
+      cta: "Get Started",
       popular: false,
-      href: "/signup?plan=trial",
     },
     {
       name: "Professional",
       price: "$10",
       period: "/month",
-      description: "For individual professionals",
+      description: "For individuals who email a lot.",
       features: [
-        "Unlimited transformations",
-        "Advanced AI analysis",
-        "Tone customization",
-        "Email history saved",
-        "Priority support",
+        "Unlimited email transforms",
+        "Advanced diplomatic rewriting",
+        "Priority processing",
+        "Email support",
       ],
-      cta: "Get Started",
+      cta: "Start Free Trial",
       popular: true,
-      href: "/signup?plan=professional",
     },
     {
       name: "Team",
-      price: "$8",
-      period: "/user/month",
-      description: "For teams of 5+ members",
+      price: "$49",
+      period: "/month",
+      description: "For HR teams and departments.",
       features: [
         "Everything in Professional",
-        "Team dashboard",
-        "Shared style guidelines",
-        "Usage analytics",
-        "Admin controls",
+        "Up to 10 team members",
+        "Team usage analytics",
         "Dedicated support",
+        "Custom tone presets",
       ],
       cta: "Contact Sales",
       popular: false,
-      href: "/contact",
     },
   ];
 
   return (
-    <section id="pricing" className="py-20 bg-navy-900">
+    <section id="pricing" className="py-20 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <h2 className="font-display text-3xl sm:text-4xl font-bold text-white mb-4">
+          <h2 className="font-display font-bold text-3xl sm:text-4xl text-foreground tracking-tight">
             Simple, transparent pricing
           </h2>
-          <p className="text-lg text-navy-300">
-            Start free, upgrade when you need more. No hidden fees.
+          <p className="mt-4 text-lg text-muted">
+            Start free. Upgrade when you need more.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
-          {tiers.map((tier, index) => (
+        <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          {plans.map((plan, index) => (
             <div
               key={index}
-              className={`relative rounded-2xl p-8 ${
-                tier.popular
-                  ? 'bg-white ring-2 ring-accent'
-                  : 'bg-navy-800 border border-navy-700'
+              className={`relative p-8 rounded-2xl border-2 ${
+                plan.popular
+                  ? "border-accent bg-white shadow-xl shadow-accent/10"
+                  : "border-gray-100 bg-white"
               }`}
             >
-              {tier.popular && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-accent text-white text-sm font-medium rounded-full">
-                  Most Popular
+              {plan.popular && (
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+                  <span className="bg-accent text-white text-xs font-semibold px-4 py-1.5 rounded-full">
+                    Most Popular
+                  </span>
                 </div>
               )}
 
               <div className="mb-6">
-                <h3 className={`font-display font-semibold text-xl mb-2 ${
-                  tier.popular ? 'text-navy-900' : 'text-white'
-                }`}>
-                  {tier.name}
+                <h3 className="font-display font-bold text-xl text-foreground">
+                  {plan.name}
                 </h3>
-                <p className={`text-sm ${tier.popular ? 'text-muted' : 'text-navy-400'}`}>
-                  {tier.description}
-                </p>
+                <p className="mt-2 text-sm text-muted">{plan.description}</p>
               </div>
 
               <div className="mb-6">
-                <span className={`font-display text-4xl font-bold ${
-                  tier.popular ? 'text-navy-900' : 'text-white'
-                }`}>
-                  {tier.price}
+                <span className="font-display font-extrabold text-4xl text-foreground">
+                  {plan.price}
                 </span>
-                <span className={`${tier.popular ? 'text-muted' : 'text-navy-400'}`}>
-                  {tier.period}
-                </span>
+                {plan.period && (
+                  <span className="text-muted">{plan.period}</span>
+                )}
               </div>
 
               <ul className="space-y-3 mb-8">
-                {tier.features.map((feature, featureIndex) => (
+                {plan.features.map((feature, featureIndex) => (
                   <li key={featureIndex} className="flex items-start gap-3">
                     <svg
                       width="20"
@@ -127,37 +104,31 @@ export default function Pricing() {
                       strokeWidth="2"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      className={`flex-shrink-0 mt-0.5 ${
-                        tier.popular ? 'text-accent' : 'text-teal-400'
-                      }`}
+                      className="text-accent flex-shrink-0 mt-0.5"
                     >
-                      <polyline points="20 6 9 17 4 12"/>
+                      <polyline points="20 6 9 17 4 12" />
                     </svg>
-                    <span className={`text-sm ${
-                      tier.popular ? 'text-navy-700' : 'text-navy-300'
-                    }`}>
-                      {feature}
-                    </span>
+                    <span className="text-muted text-sm">{feature}</span>
                   </li>
                 ))}
               </ul>
 
               <Link
-                href={tier.href}
-                className={`block w-full py-3 px-6 rounded-lg font-semibold text-center transition-all duration-200 ${
-                  tier.popular
-                    ? 'bg-accent text-white hover:bg-teal-700'
-                    : 'bg-navy-700 text-white hover:bg-navy-600 border border-navy-600'
+                href="#demo"
+                className={`block text-center py-3 px-6 rounded-lg font-semibold transition-all duration-200 ${
+                  plan.popular
+                    ? "bg-accent text-white hover:bg-teal-600"
+                    : "bg-navy-900 text-white hover:bg-navy-800"
                 }`}
               >
-                {tier.cta}
+                {plan.cta}
               </Link>
             </div>
           ))}
         </div>
 
-        <p className="text-center text-navy-400 text-sm mt-10">
-          All plans include a 14-day money-back guarantee. Cancel anytime.
+        <p className="mt-12 text-center text-sm text-muted">
+          All paid plans include a 14-day free trial. No credit card required to start.
         </p>
       </div>
     </section>
