@@ -1,0 +1,30 @@
+{
+  "name": "emaildiplomat",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "14.2.29",
+    "react": "^18",
+    "react-dom": "^18",
+    "@libsql/client": "^0.6.0",
+    "clsx": "^2.1.0",
+    "zod": "^3.22.4",
+    "stripe": "^14.14.0",
+    "@stripe/stripe-js": "^3.0.6"
+  },
+  "devDependencies": {
+    "typescript": "^5",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "tailwindcss": "^3",
+    "autoprefixer": "^10",
+    "postcss": "^8"
+  }
+}
